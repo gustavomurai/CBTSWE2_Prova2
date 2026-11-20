@@ -1,0 +1,142 @@
+
+@Prova2_Api_HostAddress = https://localhost:7222
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjQiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiVXN1YXJpbyBKV1QgVGVzdGUgMjAyNiIsImV4cCI6MTc5NTE1MjIzMSwiaXNzIjoiUHJvdmEyLkFwaSIsImF1ZCI6IlByb3ZhMi5DbGllbnQifQ.TL3nDEmqeMeP1XF2vuIwLd1il0eMQr0NImGmbeKzqiI
+
+@usuarioId = 1
+
+@produtoId = 3
+
+
+### TESTE 01 - CADASTRAR USUARIO PARA AUTENTICACAO
+
+POST {{Prova2_Api_HostAddress}}/api/usuarios
+Content-Type: application/json
+
+{
+    "nome": "Usuario JWT Teste 2026",
+    "senha": "Teste1234!",
+    "status": true
+}
+
+###
+
+
+### TESTE 02 - REALIZAR LOGIN E GERAR TOKEN JWT
+
+POST {{Prova2_Api_HostAddress}}/api/usuarios/login
+Content-Type: application/json
+
+{
+    "nome": "Usuario JWT Teste 2026",
+    "senha": "Teste1234!"
+}
+
+###
+
+
+### TESTE 03 - TENTAR LISTAR USUARIOS SEM TOKEN
+
+GET {{Prova2_Api_HostAddress}}/api/usuarios
+Accept: application/json
+
+###
+
+
+### TESTE 04 - TENTAR LISTAR PRODUTOS SEM TOKEN
+
+GET {{Prova2_Api_HostAddress}}/api/produtos
+Accept: application/json
+
+###
+
+
+### TESTE 05 - LISTAR USUARIOS COM TOKEN
+
+GET {{Prova2_Api_HostAddress}}/api/usuarios
+Accept: application/json
+Authorization: Bearer {{token}}
+
+###
+
+
+### TESTE 06 - LISTAR PRODUTOS COM TOKEN
+
+GET {{Prova2_Api_HostAddress}}/api/produtos
+Accept: application/json
+Authorization: Bearer {{token}}
+
+###
+
+
+### TESTE 07 - BUSCAR USUARIO PELO ID
+
+GET {{Prova2_Api_HostAddress}}/api/usuarios/{{usuarioId}}
+Accept: application/json
+Authorization: Bearer {{token}}
+
+###
+
+
+### TESTE 08 - CADASTRAR PRODUTO COM TOKEN
+
+POST {{Prova2_Api_HostAddress}}/api/produtos
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "nome": "Produto JWT Teste 2026",
+    "preco": 149.90,
+    "status": true
+}
+
+###
+
+
+### TESTE 09 - LISTAR PRODUTOS COM TOKEN
+
+GET {{Prova2_Api_HostAddress}}/api/produtos
+Accept: application/json
+Authorization: Bearer {{token}}
+
+###
+
+
+### TESTE 10 - BUSCAR PRODUTO PELO ID
+
+GET {{Prova2_Api_HostAddress}}/api/produtos/{{produtoId}}
+Accept: application/json
+Authorization: Bearer {{token}}
+
+###
+
+
+### TESTE 11 - ATUALIZAR PRODUTO
+
+PUT {{Prova2_Api_HostAddress}}/api/produtos/{{produtoId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "nome": "Produto JWT Atualizado 2026",
+    "preco": 179.90,
+    "status": false
+}
+
+###
+
+
+### TESTE 12 - EXCLUIR PRODUTO
+
+DELETE {{Prova2_Api_HostAddress}}/api/produtos/{{produtoId}}
+Authorization: Bearer {{token}}
+
+###
+
+
+### TESTE 13 - EXCLUIR USUARIO
+
+DELETE {{Prova2_Api_HostAddress}}/api/usuarios/{{usuarioId}}
+Authorization: Bearer {{token}}
+
+###
