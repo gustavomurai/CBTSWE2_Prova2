@@ -1,0 +1,51 @@
+﻿@model Prova2.Web.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="login-container">
+    <div class="login-card">
+
+        <h1>Prova2</h1>
+        <h2>Entrar no sistema</h2>
+
+        <p>Faça login para gerenciar os produtos.</p>
+
+        <form asp-controller="Account"
+              asp-action="Login"
+              method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="mensagem-erro"></div>
+
+            <div class="form-group">
+                <label asp-for="Nome">Nome de usuário</label>
+
+                <input asp-for="Nome"
+                       class="form-control"
+                       placeholder="Digite seu nome" />
+
+                <span asp-validation-for="Nome"
+                      class="mensagem-erro"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Senha">Senha</label>
+
+                <input asp-for="Senha"
+                       class="form-control"
+                       placeholder="Digite sua senha" />
+
+                <span asp-validation-for="Senha"
+                      class="mensagem-erro"></span>
+            </div>
+
+            <button type="submit" class="botao botao-principal">
+                Entrar
+            </button>
+
+        </form>
+
+    </div>
+</div>

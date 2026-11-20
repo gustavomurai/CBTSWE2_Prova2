@@ -1,0 +1,109 @@
+﻿@model IEnumerable<Prova2.Web.Models.ProdutoViewModel>
+
+@{
+    ViewData["Title"] = "Produtos";
+}
+
+<div class="pagina">
+
+    <div class="cabecalho">
+        <div>
+            <h1>Produtos</h1>
+            <p>Gerenciamento de produtos cadastrados.</p>
+        </div>
+
+        <a asp-controller="Produtos"
+           asp-action="Criar"
+           class="botao botao-principal">
+            + Novo Produto
+        </a>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="tabela-container">
+
+            <table class="tabela">
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Preço</th>
+                        <th>Status</th>
+                        <th>Usuário Cadastro</th>
+                        <th>Usuário Update</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var produto in Model)
+                    {
+                        <tr>
+                            <td>@produto.Id</td>
+
+                            <td>@produto.Nome</td>
+
+                            <td>
+                                @produto.Preco.ToString("C2",
+                                System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))
+                    </td>
+
+                    <td>
+                        @if (produto.Status)
+                                {
+                                    <span class="status ativo">Ativo</span>
+                                }
+                                else
+                                {
+                                    <span class="status inativo">Inativo</span>
+                                }
+                            </td>
+
+                            <td>@produto.IdUsuarioCadastro</td>
+
+                            <td>@produto.IdUsuarioUpdate</td>
+
+                            <td>
+                                <div class="acoes">
+
+                                    <a asp-controller="Produtos"
+                                       asp-action="Editar"
+                                       asp-route-id="@produto.Id"
+                                       class="botao botao-editar">
+                                        Editar
+                                    </a>
+
+                                    <form asp-controller="Produtos"
+                                          asp-action="Excluir"
+                                          asp-route-id="@produto.Id"
+                                          method="post"
+                                          onsubmit="return confirm('Deseja realmente excluir este produto?');">
+
+                                        <button type="submit"
+                                                class="botao botao-excluir">
+                                            Excluir
+                                        </button>
+
+                                    </form>
+
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+        </div>
+    }
+    else
+    {
+        <div class="vazio">
+            <h3>Nenhum produto encontrado.</h3>
+            <p>Cadastre um produto para começar.</p>
+        </div>
+    }
+
+</div>
