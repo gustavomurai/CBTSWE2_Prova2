@@ -1,0 +1,25 @@
+
+# Visual Studio
+.vs/
+**/.vs/
+
+# Arquivos de compilacao
+**/bin/
+**/obj/
+
+# Configuracoes pessoais
+*.user
+*.suo
+*.rsuser
+
+# Banco de dados local
+*.db
+*.db-shm
+*.db-wal
+
+# Configuracoes locais
+.env
+**/appsettings.Development.json
+
+# Requisicoes que podem conter tokens
+Prova2.Api/Prova2.Api.http
